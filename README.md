@@ -1,8 +1,10 @@
 # FASTAPIHOME
 Home server done with FAST API to be installed on a raspberry py
 
+run server: uvicorn main:app --reload
+
 ## Functions:
-Send Telegram message one day before glass trash
+Send notifications to smartphones with pushbullet
 
 ## installation:
 1. pip install fastapi
@@ -15,7 +17,6 @@ for task/function scheduling
 ## Ideas:
 - https://nickgeorge.net/pydantic-sqlite3/<br>
 making SQLite3 and pydantic working together
-
 
 ## Todo:
 - [ ] send messages with telegram API
