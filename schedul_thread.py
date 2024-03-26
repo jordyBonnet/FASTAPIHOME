@@ -1,5 +1,6 @@
 import threading
 from datetime import datetime
+import time
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -7,6 +8,8 @@ import re
 from pushbullet import Pushbullet
 import pushbullet_messages as pbm
 import pushbullet_functions as pbf
+import warnings
+warnings.filterwarnings('ignore')
 
 important_teams = ['France', 'Marseille', 'ParisSG', 'San Antonio', 'Real Madrid', 'FC Barcelone', 'Manchester City', 'Arsenal', 'Liverpool', 'Bayern Munich']
 
@@ -109,16 +112,15 @@ def get_lequipe_informations(date=None):
 
 #region PUSHBULLET functions
 def send_message_to_user(message):
-    PB_API_KEY = ''
-    pb = Pushbullet(PB_API_KEY)
+    pb = Pushbullet(pbm.API_KEY)
     pb.push_note("Daily sports events", message)
 #endregion PUSHBULLET functions
 
+# Event to stop the thread
+stop_event = threading.Event()
 
 def my_function():
-    """Function to run every day after 8:30 AM and get the data from the website"""
     global has_run_today
-        
     # Get the current time
     now = datetime.now()
 
@@ -132,14 +134,23 @@ def my_function():
 
         # Set the flag to True so the function won't run again today
         has_run_today = True
+    else:
+        # Print the current datetime with the format DD MM hh:mm
+        print(now.strftime("%d.%m %Hh%M - Waiting for 8:30 AM to run the function"))
 
     # At midnight, reset the flag
     if now.hour == 0:
         has_run_today = False
 
-
 def run_thread():
-    threading.Timer(60 * 30, run_thread).start()  # Check every 30 minutes
-    my_function()
+    while not stop_event.is_set():
+        my_function()
+        time.sleep(60*30)  # Pause for 30 minutes
 
-run_thread()
+# Start the thread
+thread = threading.Thread(target=run_thread)
+thread.start()
+
+# When the main program is about to exit, stop the thread
+import atexit
+atexit.register(stop_event.set)

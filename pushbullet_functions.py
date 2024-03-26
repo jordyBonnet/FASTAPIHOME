@@ -9,7 +9,7 @@ import datetime
 class PushbulletFunctions:
     """wrapper for pushbullet functions"""
     def __init__(self) -> None:
-        self.PB_API_KEY = 'o.CUjcmwkfoQjvwY0pMBOlqGUAyW4fqZlx'
+        self.PB_API_KEY = pbm.API_KEY
         self.pb = Pushbullet(self.PB_API_KEY)
         self.current_date = datetime.date.today()
 
@@ -32,7 +32,7 @@ class PushbulletFunctions:
             datetime.datetime.strptime("17 Dec", "%d %b") - datetime.timedelta(days=1)
         ]
 
-    # sheduled function from FAST API utils (no arguments allowed)
+    # scheduled function from FAST API utils (no arguments allowed)
     def send_notification_by_pushbullet(self, db: Session) -> None:
         
         # 0. update self.current for the rest of the functions/methods
