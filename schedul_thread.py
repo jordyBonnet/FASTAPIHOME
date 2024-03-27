@@ -35,7 +35,7 @@ def daily_sports_events():
 # glass trash next day
 has_run_today_gtnd = False
 def glass_trash_next_day():
-    global has_run_today
+    global has_run_today_gtnd
     now = datetime.now()
     # Check if it's past 18 and the function hasn't run today
     if now.hour >= 18 and not has_run_today_gtnd:
