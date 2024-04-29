@@ -73,8 +73,14 @@ def get_all_matchs(soup):
 
     # Check if important teams are in the new columns
     important_matches = df[(df['CleanTeam1'].isin(IMPORTANT_TEAMS)) | (df['CleanTeam2'].isin(IMPORTANT_TEAMS))]
-    important_matches = important_matches[(important_matches['Sport'] == 'Football') | (important_matches['Sport'] == 'Basket')]
-    important_matches.drop(['CleanTeam1', 'CleanTeam2'], axis=1, inplace=True)
+    # Split the condition into two parts
+    football_matches = important_matches[(important_matches['Sport'] == 'Football')]
+    basketball_matches = important_matches[(important_matches['Sport'] == 'Basket') & (important_matches['Competition'].str.contains('NBA'))]
+
+    # Concatenate the results
+    important_matches = pd.concat([football_matches, basketball_matches])
+
+    important_matches.drop(['CleanTeam1', 'CleanTeam2', 'Sport'], axis=1, inplace=True)
     df_string = important_matches.to_string(index=False, header=False)
     return df_string
 
