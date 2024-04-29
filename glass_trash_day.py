@@ -16,7 +16,6 @@ glass_tash_dates = [
     datetime.datetime.strptime("20 Feb 2024", "%d %b %Y").date() - datetime.timedelta(days=1),
     datetime.datetime.strptime("19 Mar 2024", "%d %b %Y").date() - datetime.timedelta(days=1),
     datetime.datetime.strptime("16 Apr 2024", "%d %b %Y").date() - datetime.timedelta(days=1),
-    datetime.datetime.strptime("30 Apr 2024", "%d %b %Y").date() - datetime.timedelta(days=1),
     datetime.datetime.strptime("21 May 2024", "%d %b %Y").date() - datetime.timedelta(days=1),
     datetime.datetime.strptime("18 Jun 2024", "%d %b %Y").date() - datetime.timedelta(days=1),
     datetime.datetime.strptime("16 Jul 2024", "%d %b %Y").date() - datetime.timedelta(days=1),
