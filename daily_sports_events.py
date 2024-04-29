@@ -17,8 +17,8 @@ IMPORTANT_TEAMS = [
     'Bayern Munich'\
 ]
 
-                
-                
+
+
 #region LEQUIPE scrap functions
 def scrape_lequipe(date=None):
     if date is not None:

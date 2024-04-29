@@ -38,7 +38,7 @@ def glass_trash_next_day():
     global has_run_today_gtnd
     now = datetime.now()
     # Check if it's past 18 and the function hasn't run today
-    if now.hour >= 18 and not has_run_today_gtnd:
+    if now.hour >= 8 and not has_run_today_gtnd:
         url = f"http://127.0.0.1:8000/glass_trash_day"
         response = requests.get(url)
         print(f'{now.strftime("%d.%m %Hh%M - ")} - {response.json()["message"]}')
@@ -58,8 +58,9 @@ def glass_trash_next_day():
 def run_thread():
     while not stop_event.is_set():
         daily_sports_events()
+        # time.sleep(10)      # Pause for 10 seconds
         glass_trash_next_day()
-        time.sleep(60*20)  # Pause for 30 minutes
+        time.sleep(60*20)   # Pause for 20 minutes
 
 # Start the thread
 thread = threading.Thread(target=run_thread)
