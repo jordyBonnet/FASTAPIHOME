@@ -47,7 +47,8 @@ def glass_trash_next_day():
         has_run_today_gtnd = True
     else:
         # Print the current datetime with the format DD MM hh:mm
-        print(now.strftime("%d.%m %Hh%M - Waiting for 8:30 AM to run the function"))
+        # print(now.strftime("%d.%m %Hh%M - Waiting for 8:30 AM to run the function"))
+        pass
 
     # At midnight, reset the flag
     if now.hour == 0:

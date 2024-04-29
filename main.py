@@ -1,6 +1,8 @@
 """
 Main FASTAPI app
 
+To run the API:
+source .venv/bin/activate
 uvicorn main:app --reload
 """
 
@@ -26,7 +28,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"msg": "FASTAPIHOME"}
+    return {"message": "FASTAPIHOME"}
 
 @app.get("/daily_sports_events")
 def daily_sports_events():

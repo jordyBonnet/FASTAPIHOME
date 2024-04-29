@@ -10,8 +10,15 @@ import pushbullet_messages as pbm
 import warnings
 warnings.filterwarnings('ignore')
 
-IMPORTANT_TEAMS = ['France', 'Marseille', 'ParisSG', 'San Antonio', 'Real Madrid', 'FC Barcelone', 'Manchester City', 'Arsenal', 'Liverpool', 'Bayern Munich']
+IMPORTANT_TEAMS = [
+    'France', 'Marseille', 'ParisSG', 'San Antonio',\
+    'Real Madrid', 'FC Barcelone', 'Manchester City',\
+    'Arsenal', 'Liverpool', 'Chelsea', 'Manchester United',\
+    'Bayern Munich'\
+]
 
+                
+                
 #region LEQUIPE scrap functions
 def scrape_lequipe(date=None):
     if date is not None:
@@ -66,6 +73,7 @@ def get_all_matchs(soup):
 
     # Check if important teams are in the new columns
     important_matches = df[(df['CleanTeam1'].isin(IMPORTANT_TEAMS)) | (df['CleanTeam2'].isin(IMPORTANT_TEAMS))]
+    important_matches = important_matches[(important_matches['Sport'] == 'Football') | (important_matches['Sport'] == 'Basket')]
     important_matches.drop(['CleanTeam1', 'CleanTeam2'], axis=1, inplace=True)
     df_string = important_matches.to_string(index=False, header=False)
     return df_string

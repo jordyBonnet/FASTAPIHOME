@@ -30,7 +30,7 @@ def send_message_to_user(message):
     pb = Pushbullet(pbm.API_KEY)
     pb.push_note("Home:", message)
 
-def main(self):
+def main():
     current_date = datetime.date.today()
     for date in glass_tash_dates:
         if date == current_date :
